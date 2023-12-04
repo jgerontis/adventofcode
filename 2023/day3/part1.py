@@ -61,6 +61,8 @@ def main():
                     total += int(current_number)
                 current_number = ''
                 part_number = False
+            if current_number != '' and part_number and col == len(data[row]) - 1:
+                total += int(current_number)
     print(total)
 
 
