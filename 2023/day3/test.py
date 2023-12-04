@@ -32,14 +32,8 @@ def test_part1():
                 current_number = ''
                 part_number = False
     print(total)
-
-def test_get_number():
-    data = ["......643............*...................756.........677.*..........251......521..620......................................685.206.......132"]
-    print(get_number(data, 0, 6))
-    print(get_number(data, 0, 138))
-
     
 
 if __name__ == '__main__':
     test_part1()
-    test_get_number()
+    # test_get_number()

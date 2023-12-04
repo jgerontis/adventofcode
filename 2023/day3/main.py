@@ -25,6 +25,7 @@ def get_number(data, row, col) -> str:
         col += 1
     return num
     
+# returns true if there is a symbol near the given row and col
 def near_symbol(data, row, col, row_length) -> bool:
     if row > 0:
         # check above
@@ -56,6 +57,57 @@ def near_symbol(data, row, col, row_length) -> bool:
             return True
     return False
 
+# returns gear product if valid gear, else 0
+def is_gear(data, row, col, row_length) -> int:
+    if data[row][col] != '*':
+        return 0
+    neighbors = []
+    if row > 0:
+        # check above
+        above = get_number(data, row - 1,col)
+        if above != '':
+            neighbors.append(above)
+        else:
+            # check top left
+            if col > 0:
+                top_left = get_number(data, row - 1, col - 1)
+                if top_left != '':
+                    neighbors.append(top_left)
+            # check top right
+            if col < row_length - 1:
+                top_right = get_number(data, row - 1, col + 1)
+                if top_right != '':
+                    neighbors.append(top_right)
+    # check below
+    if row < len(data) - 1:
+        below = get_number(data, row + 1, col)
+        if below != '':
+            neighbors.append(below)
+        else:
+            # check bottom left
+            if col > 0:
+                bottom_left = get_number(data, row + 1, col - 1)
+                if bottom_left != '':
+                    neighbors.append(bottom_left)
+            # check bottom right
+            if col < row_length - 1:
+                bottom_right = get_number(data, row + 1, col + 1)
+                if bottom_right != '':
+                    neighbors.append(bottom_right)
+    # check left
+    if col > 0:
+        left = get_number(data, row, col - 1)
+        if left != '':
+            neighbors.append(left)
+    # check right
+    if col < row_length - 1:
+        right = get_number(data, row, col + 1)
+        if right != '':
+            neighbors.append(right)
+    if len(neighbors) == 2:
+        return int(neighbors[0]) * int(neighbors[1])
+    return 0
+
 def main():
     data = get_data()
     total = 0
@@ -82,21 +134,13 @@ def main():
     # we're going to read a char at a time again,
     # but this time we're going to look for gears
     # and check if it has exactly 2 numbers around it
-    # for row in range(len(data)):
-    #     current_number = ''
-    #     part_number = False
-    #     for col, char in enumerate(data[row]):
-    #         if char.isdigit():
-    #             if near_symbol(data, row, col, len(data[row])):
-    #                 part_number = True
-    #             current_number += char
-    #         else:
-    #             if current_number != '' and part_number:
-    #                 total += int(current_number)
-    #             current_number = ''
-    #             part_number = False
-    #         if current_number != '' and part_number and col == len(data[row]) - 1:
-    #             total += int(current_number)
+    total = 0
+    for row in range(len(data)):
+        for col, char in enumerate(data[row]):
+            gear_value = is_gear(data, row, col, len(data[row]))
+            if gear_value != 0:
+                total += gear_value
+    print("part2: ", total)
 
 
 
