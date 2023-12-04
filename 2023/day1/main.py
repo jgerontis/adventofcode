@@ -1,3 +1,7 @@
+def get_data():
+    with open('data.txt', 'r') as f:
+        return f.read().splitlines()
+
 def wordsToNums(line: str) -> str:
     numbers = {
         'one': '1',
@@ -16,7 +20,7 @@ def wordsToNums(line: str) -> str:
             return num
 
 
-def value(line: str) -> int:
+def value(line: str, part2=False) -> int:
     value = ''
     # forward
     for i in range(len(line)):
@@ -24,7 +28,7 @@ def value(line: str) -> int:
             value += line[i]
             break
         num = wordsToNums(line[i:])
-        if num:
+        if num and part2:
             value += num
             break
     num = None
@@ -34,18 +38,22 @@ def value(line: str) -> int:
             value += line[i]
             break
         num = wordsToNums(line[i:])
-        if num:
+        if num and part2:
             value += num
             break
     return int(value)
 
 def main():
-    fin = open('data.txt', 'r')
+    data = get_data()
     total = 0
-    for line in fin:
-        line = line.strip()
+    for line in data:
         total += value(line)
-    print(total)
+    print("part1: ", total)
+
+    total = 0
+    for line in data:
+        total += value(line, True)
+    print("part2: ", total)
 
 if __name__ == '__main__':
     main()
