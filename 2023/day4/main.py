@@ -1,3 +1,11 @@
+def get_data():
+    data = []
+    fin = open('data.txt', 'r')
+    for line in fin:
+        data.append(line.strip())
+    fin.close()
+    return data
+
 def parse_line(line):
     left, right = line.split('|')
     left = left[10:].split()
@@ -12,15 +20,21 @@ def score_per_card(left, right):
     return matches
 
 def main():
-    fin = open('data.txt', 'r')
+    data = get_data()
     total = 0
     lefts = []
     rights = []
-    copies = []
-    for line in fin:
+    for line in data:
         left, right = parse_line(line)
         lefts.append(left)
         rights.append(right)
+    # part1
+    for i in range(len(lefts)):
+        matches = score_per_card(lefts[i], rights[i])
+        if matches > 0:
+            total += 2 ** (matches - 1)
+    print("part1: ", total)
+    # part2
     copies = [1] * len(lefts)
     for i in range(len(lefts)):
         matches = score_per_card(lefts[i], rights[i])
@@ -33,6 +47,7 @@ def main():
             else:
                 break
 
-    print(sum(copies))
+    print("part2: ", sum(copies))
 
-main()
+if __name__ == '__main__':
+    main()

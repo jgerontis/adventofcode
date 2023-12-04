@@ -1,4 +1,4 @@
-from part2 import score_per_card
+from main import score_per_card
 
 def test():
     lefts = [
