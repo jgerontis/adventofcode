@@ -1,6 +1,6 @@
-from part1 import near_symbol, is_symbol
+from main import near_symbol, get_number
 
-def test():
+def test_part1():
     data = [
         "467..114..",
         "...*......",
@@ -32,7 +32,14 @@ def test():
                 current_number = ''
                 part_number = False
     print(total)
+
+def test_get_number():
+    data = ["......643............*...................756.........677.*..........251......521..620......................................685.206.......132"]
+    print(get_number(data, 0, 6))
+    print(get_number(data, 0, 138))
+
     
 
 if __name__ == '__main__':
-    test()
+    test_part1()
+    test_get_number()
