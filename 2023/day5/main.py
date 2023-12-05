@@ -116,25 +116,25 @@ def main():
     print("part1: ", min(locations))
 
     # part 2
-    locations = []
-    seed_pairs = [seeds[i:i+2] for i in range(0,len(seeds),2)]
-    for pair in seed_pairs:
-        for row in seed_to_soil_map:
-            if has_overlap(pair, row):
-                for seed in range(pair[0], pair[0]+pair[1]):
-                    soil = get_destination_value(seed_to_soil_map, seed)
+    # locations = []
+    # seed_pairs = [seeds[i:i+2] for i in range(0,len(seeds),2)]
+    # for pair in seed_pairs:
+    #     for row in seed_to_soil_map:
+    #         if has_overlap(pair, row):
+    #             for seed in range(pair[0], pair[0]+pair[1]):
+    #                 soil = get_destination_value(seed_to_soil_map, seed)
             
 
 
-        for seed in seed_range:
-            soil = get_destination_value(seed_to_soil_map, seed)
-            fertilizer = get_destination_value(soil_to_fertilizer_map, soil)
-            water = get_destination_value(fertilizer_to_water_map, fertilizer)
-            light = get_destination_value(water_to_light_map, water)
-            temperature = get_destination_value(light_to_temperature_map, light)
-            humidity = get_destination_value(temperature_to_humidity_map, temperature)
-            locations.append(get_destination_value(humidity_to_location_map, humidity))
-    print("part2: ", min(locations))
+    #     for seed in seed_range:
+    #         soil = get_destination_value(seed_to_soil_map, seed)
+    #         fertilizer = get_destination_value(soil_to_fertilizer_map, soil)
+    #         water = get_destination_value(fertilizer_to_water_map, fertilizer)
+    #         light = get_destination_value(water_to_light_map, water)
+    #         temperature = get_destination_value(light_to_temperature_map, light)
+    #         humidity = get_destination_value(temperature_to_humidity_map, temperature)
+    #         locations.append(get_destination_value(humidity_to_location_map, humidity))
+    # print("part2: ", min(locations))
 
 
 def get_destination_value(map, input):
