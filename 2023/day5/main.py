@@ -90,7 +90,7 @@ def main():
                 new_s.extend(get_mapped_pairs(s, m))
             seed_ranges = new_s[:]
         result.append(min(x for x, _ in seed_ranges))
-    print(min(result))
+    print("part2: ", min(result))
 
 if __name__ == '__main__':
     main()
