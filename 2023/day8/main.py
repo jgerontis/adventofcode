@@ -1,3 +1,5 @@
+import math
+
 def get_data():
     fin = open('data.txt', 'r')
     steps = fin.readline().strip()
@@ -22,7 +24,21 @@ def main():
         i = LR(steps[step%len(steps)])
         target = maps[target][i]
         step += 1
-    print(step)
+    print("part1: ", step)
+
+    start_keys = []
+    for key in maps.keys():
+        if key.endswith('A'):
+            start_keys.append(key)
+    print(start_keys)
+
+    step_list = [0] * len(start_keys)
+    for i, key in enumerate(start_keys):
+        while not key.endswith('Z'):
+            key = maps[key][LR(steps[step_list[i]%len(steps)])]
+            step_list[i] += 1
+    print(step_list)
+    print("part 2: ", math.lcm(*step_list))
             
 
         
